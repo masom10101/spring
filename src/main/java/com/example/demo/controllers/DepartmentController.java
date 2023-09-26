@@ -11,24 +11,28 @@ import org.springframework.web.bind.annotation.*;
 public class DepartmentController {
 
 
-   /* @Autowired
-    private DepartmentService departmentService;*/
+    @Autowired
+    private DepartmentService departmentService;
 
     @Autowired
     private DeparmentRepository deparmentRepository;
 
 
     @PostMapping(value = "departments")
-    public Department save(@RequestBody Department department) {
-//       return departmentService.saveDeparment(department);
+    public Department saveDepartment(@RequestBody Department department) {
+       return departmentService.saveDeparment(department);
 
-
-        return deparmentRepository.save(department);
-
-
-//        return "Department saved";
     }
+    @PutMapping(value = "update-department")
+    public Department updateDepartment(@RequestBody Department department) {
+        return departmentService.updateDepartment(department);
 
+    }
+    @DeleteMapping(value = "delete-department/{Id}")
+    public String deleteDepartment(@PathVariable("Id") Long id) {
+        return departmentService.deleteDepartment(id);
+
+    }
 
     @GetMapping(value = "departments/{Id}")
     public Department getDepartmentById(@PathVariable("Id") Long id) {
